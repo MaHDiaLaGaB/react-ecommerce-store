@@ -824,6 +824,128 @@ const games = [
             "https://res.cloudinary.com/gianlucajahn/image/upload/v1658238650/tombraider_3_cr0yee.jpg"
         ]
     },
+    {
+        name: "Netflix",
+        surname: "netflix",
+        price: "17.99",
+        desc: 'Netflix gift card is a prepaid card that has a certain amount of balance which can be used to pay for current Netflix membership or start a new one. Besides that, you can also buy a Netflix gift card for your friends so they can enjoy everything Netflix has to offer',
+        link: 'https://www.netflix.com/',
+        release: '4th of March, 2013',
+        platforms: 'SmartTV, Smartphones, Xbox, Mac, PC, PlayStation',
+        genre: 'Gift Cards',
+        developers: 'Netflix',
+        publishers: 'Netflix',
+        inCart: false,
+        selected: false,
+        isHovered: false,
+        isLiked: false,
+        rating: 4.3,
+        id: 33,
+        cover: "https://res.cloudinary.com/ddhodtcha/image/upload/v1678780335/Netflex_newdf4.png",
+        footage: [
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678781234/wp1917119-netflix-wallpapers_hxhdrc.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678781235/wp1917154-netflix-stranger_ml40jo.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678781234/wp1917128-netflix-devil_ck4mni.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678781234/wp1917125-netflix-house_yxrl0y.jpg"
+        ]
+    },
+    {
+        name: "Prime",
+        surname: "prime",
+        price: "17.99",
+        desc: 'Prime Video is home to more content than you might realize. If you’re ready to stream blockbuster movies, hit shows, award-winning Amazon Originals, premium channels, and sports, read on for everything you need to know about Prime Video.',
+        link: 'https://www.primevideo.com/',
+        release: '4th of March, 2013',
+        platforms: 'SmartTV, Smartphones, Xbox, Mac, PC, PlayStation',
+        genre: 'Gift Cards',
+        developers: 'Amazon',
+        publishers: 'Amazon',
+        inCart: false,
+        selected: false,
+        isHovered: false,
+        isLiked: false,
+        rating: 4,
+        id: 34,
+        cover: "https://res.cloudinary.com/ddhodtcha/image/upload/c_scale,h_700/v1678851463/wp8338657-amazon-prime-video-wallpapers_stqjgq.jpg",
+        footage: [
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848954/wp4682696-prime-video-wallpapers_v72w05.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848971/wp8338949-amazon-prime-video-wallpapers_y4lox0.png",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848957/wp8338871-amazon-prime-video-wallpapers_i6tgsn.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848955/wp8338987-amazon-prime-video-wallpapers_da452c.jpg"
+        ]
+    },
+    {
+        name: "Xbox",
+        surname: "xbox",
+        price: "17.99",
+        desc: 'You don’t have to overpay to get up to date with the best and most popular Xbox games. Get Xbox bestsellers at attractive prices and never get left behind.',
+        link: 'https://www.xbox.com/',
+        release: '4th of March, 2013',
+        platforms: 'Xbox, PC',
+        genre: 'Gift Cards',
+        developers: 'Microsoft Studios',
+        publishers: 'Microsoft',
+        inCart: false,
+        selected: false,
+        isHovered: false,
+        isLiked: false,
+        rating: 4.5,
+        id: 35,
+        cover: "https://res.cloudinary.com/ddhodtcha/image/upload/c_scale,h_800,w_1400/v1678851282/wp11928705-xbox-2023-wallpapers_o8vjzp.jpg",
+        footage: [
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678849036/wp11928391-xbox-2023-wallpapers_qyqx8u.jpg",
+        ]
+    },
+    {
+        name: "Ubisoft",
+        surname: "ubisoft",
+        price: "17.99",
+        desc: 'At Ubisoft, we create worlds for everyone. We are dedicated to enriching the lives of our players by developing high-quality games that resonate with all kinds of personalities, bring people together, and allow everyone to learn and grow while having fun.',
+        link: 'https://www.ubisoft.com/',
+        release: '4th of March, 2013',
+        platforms: 'Xbox, PC, PlayStation',
+        genre: 'Gift Cards',
+        developers: 'Ubisoft',
+        publishers: 'Ubisoft',
+        inCart: false,
+        selected: false,
+        isHovered: false,
+        isLiked: false,
+        rating: 2,
+        id: 36,
+        cover: "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848982/wp6470697-ubisoft-logo-desktop-4k-wallpapers_exi90m.png",
+        footage: [
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848983/wp11325567-ubisoft-games-wallpapers_wvvdbu.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848986/wp11325594-ubisoft-games-wallpapers_pachrt.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848987/wp11325609-ubisoft-games-wallpapers_xxbbub.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848988/wp11325587-ubisoft-games-wallpapers_deneqd.jpg"
+        ]
+    },
+    {
+        name: "Steam",
+        surname: "steam",
+        price: "17.99",
+        desc: 'Netflix gift card is a prepaid card that has a certain amount of balance which can be used to pay for current Netflix membership or start a new one. Besides that, you can also buy a Netflix gift card for your friends so they can enjoy everything Netflix has to offer',
+        link: 'https://store.steampowered.com/',
+        release: '4th of March, 2013',
+        platforms: 'SmartTV, Mac, PC',
+        genre: 'Gift Cards',
+        developers: 'Valve',
+        publishers: 'Valve',
+        inCart: false,
+        selected: false,
+        isHovered: false,
+        isLiked: false,
+        rating: 4,
+        id: 37,
+        cover: "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848979/wp11255194-steam-logo-wallpapers_m8xrut.png",
+        footage: [
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848975/wp10455245-steam-games-wallpapers_q524z2.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848975/wp11353814-cool-desktop-video-games-wallpapers_q4uetn.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848980/wp4207826-control-video-game-wallpapers_bchtkb.jpg",
+            "https://res.cloudinary.com/ddhodtcha/image/upload/v1678848978/wp12032189-steam-games-wallpapers_etjant.jpg"
+        ]
+    }
 ]
 
 export default games;

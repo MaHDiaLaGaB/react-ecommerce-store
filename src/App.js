@@ -28,80 +28,80 @@ function App() {
   const [textExtended, setTextExtended] = useState(false);
   const [hoverState, setHoverState] = useState([
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
-        hovered: false,
-        selected: false
+      hovered: false,
+      selected: false
     },
     {
       hovered: false,
@@ -129,133 +129,135 @@ function App() {
     }
   ]);
 
-const navigate = useNavigate();
-const location = useLocation();
+  const navigate = useNavigate();
+  const location = useLocation();
 
-if (location.pathname !== "/" && location.pathname !== "/browse" && selectedGame === false) {
-  let surname = location.pathname.substring(29);
-  console.log("test");
-  let currentGame = games.find(game => game.surname === surname);
-  if (currentGame !== undefined) {
-    setSelectedGame(currentGame);
-  } else {
-    setSelectedGame(templateGame);
+  if (location.pathname.includes("/games/") && selectedGame === false) {
+    let surname = location.pathname.split("/").pop()
+    console.log("test");
+    console.log({surname})
+    let currentGame = games.find(game => game.surname === surname);
+    if (currentGame != undefined) {
+      console.log("found one", {currentGame})
+      setSelectedGame(currentGame);
+    } else {
+      console.log("used template")
+      setSelectedGame(templateGame);
+    }
   }
-}
 
-async function handleBrowse() {
-  setExtended(false);
-  setTextExtended(false);
-  setCartDisplayed(false);
-  setHoverState([...hoverState, hoverState[21].hovered = false]);
-  navigate('/browse');
-}
-
-const handleHome = () => {
-  setExtended(false);
-  setTextExtended(false);
-  setCartDisplayed(false);
-  setHoverState([...hoverState, hoverState[21].hovered = false]);
-  navigate('/');
-}
-
-const handleSearch = (e) => {
-  setSearch(e.target.value);
-  setSearching(false);
-}
-
-const handleSearchSubmit = (e) => {
-  setCurrentFilter("none");
-  e.preventDefault();
-  setSearching(true);
-
-  if (location.pathname !== "/browse") {
+  async function handleBrowse() {
+    setExtended(false);
+    setTextExtended(false);
+    setCartDisplayed(false);
+    setHoverState([...hoverState, hoverState[21].hovered = false]);
     navigate('/browse');
   }
-}
 
-const handleSelect = (e) => {
-  setCurrentFilter(filterNames[e.target.id - 8]);
-}
-
-const handleSelectGame = (e) => {
-  if (e.target.tagName === "BUTTON") {
-    return
-  } else if (e.target.classList[0] !== "AddToCart_addToCart__zbJPe") {
-        setSelectedGame(games[e.target.parentNode.id]);
-        navigate(`/games/${games[e.target.parentNode.id].surname}`);
-  }
-}
-
-const handleLike = (e) => {
-  let handledLike = allGames.map((game, i) => {
-    if (e.target.id === i) {
-      game.isLiked = !game.isLiked
-      return game
-    } else {
-      return game;
-    }
-  });
-
-  setAllGames(handledLike);
-}
-
-const clearFilter = () => {
-  setCurrentFilter("none");
-  setSearch("");
-  setReviewDisplay(false);
-}
-
-const openGamePage = (e) => {
-  setCartDisplayed(false);
-  let selectedGameSurname = e.target.id;
-  navigate(`/games/${selectedGameSurname}`);
-}
-
-const handleHover = (e) => {
-  if (hoverState[e.target.id].selected) {
-    return;
+  const handleHome = () => {
+    setExtended(false);
+    setTextExtended(false);
+    setCartDisplayed(false);
+    setHoverState([...hoverState, hoverState[21].hovered = false]);
+    navigate('/');
   }
 
-  let newHoverState = hoverState.map((element, i) => {
-    if (e.target.id === i) {
-      element.hovered = !element.hovered;
-      return element
-    } else {
-      return element;
+  const handleSearch = (e) => {
+    setSearch(e.target.value);
+    setSearching(false);
+  }
+
+  const handleSearchSubmit = (e) => {
+    setCurrentFilter("none");
+    e.preventDefault();
+    setSearching(true);
+
+    if (location.pathname != "/browse") {
+      navigate('/browse');
     }
-  });
-    
-  setHoverState(newHoverState);
-}
+  }
 
-const handleHoverGame = (e) => {
-  let handledHoveredGame = allGames.map((game, i) => {
-    if (e.target.id === i) {
-      game.isHovered = !game.isHovered
-      return game
-    } else {
-      return game;
+  const handleSelect = (e) => {
+    setCurrentFilter(filterNames[e.target.id - 8]);
+  }
+
+  const handleSelectGame = (e) => {
+    if (e.target.tagName === "BUTTON") {
+    } else if (e.target.classList[0] != "AddToCart_addToCart__zbJPe") {
+      // setSelectedGame(games[e.target.parentNode.id]);
+      navigate(`/games/${games[e.target.parentNode.id].surname}`);
     }
-  });
+  }
 
-  setAllGames(handledHoveredGame);
-}
-
-const handleAddToCart = (e) => {
-  let handledAddedGame = allGames.map((game, i) => {
-    if (location.pathname === "/browse") {
-      if (e.target.id === i) {
-        game.inCart = true
-        let newCart = cart;
-        newCart.push(game);
-        setCart(newCart);
-        setCartAmount(cartAmount + 1);
+  const handleLike = (e) => {
+    let handledLike = allGames.map((game, i) => {
+      if (e.target.id == i) {
+        game.isLiked = !game.isLiked
         return game
       } else {
         return game;
       }
-    } else {
+    });
+
+    setAllGames(handledLike);
+  }
+
+  const clearFilter = () => {
+    setCurrentFilter("none");
+    setSearch("");
+    setReviewDisplay(false);
+  }
+
+  const openGamePage = (e) => {
+    setCartDisplayed(false);
+    let selectedGameSurname = e.target.id;
+    navigate(`/games/${selectedGameSurname}`);
+  }
+
+  const handleHover = (e) => {
+    if (hoverState[e.target.id].selected) {
+      return;
+    }
+
+    let newHoverState = hoverState.map((element, i) => {
+      if (e.target.id === i) {
+        element.hovered = !element.hovered;
+        return element
+      } else {
+        return element;
+      }
+    });
+
+    setHoverState(newHoverState);
+  }
+
+  const handleHoverGame = (e) => {
+    let handledHoveredGame = allGames.map((game, i) => {
+      if (e.target.id === i) {
+        game.isHovered = !game.isHovered
+        return game
+      } else {
+        return game;
+      }
+    });
+
+    setAllGames(handledHoveredGame);
+  }
+
+  const handleAddToCart = (e) => {
+    let handledAddedGame = allGames.map((game, i) => {
+      if (location.pathname === "/browse") {
+        if (e.target.id === i) {
+          game.inCart = true
+          let newCart = cart;
+          newCart.push(game);
+          setCart(newCart);
+          setCartAmount(cartAmount + 1);
+          return game
+        } else {
+          return game;
+        }
+      } else {
         if (selectedGame.id === i) {
           game.inCart = true
           let newCart = cart;
@@ -266,191 +268,191 @@ const handleAddToCart = (e) => {
         } else {
           return game;
         }
-    }
-  });
+      }
+    });
 
-  setAllGames(handledAddedGame);
-}
+    setAllGames(handledAddedGame);
+  }
 
-const clearCart = () => {
-  setCart([]);
-  setCartAmount(0);
-  const defaultGames = allGames.map((game, i) => {
-    game.inCart = false;
-    game.isHovered = false;
-    return game;
-  });
-  setAllGames(defaultGames);
-  let newHoverState = hoverState[21];
-  newHoverState.hovered = false;
-  setHoverState([
-    ...hoverState, hoverState[21] = newHoverState
-  ]);
-}
-
-const handleRemoveFromCart = (e) => {
-  let removedIndex = cart.findIndex(game => game.id == e.target.id);
-  let newAllGames = allGames.map((game, i) => {
-    if (game.id == e.target.id) {
+  const clearCart = () => {
+    setCart([]);
+    setCartAmount(0);
+    const defaultGames = allGames.map((game, i) => {
       game.inCart = false;
       game.isHovered = false;
       return game;
+    });
+    setAllGames(defaultGames);
+    let newHoverState = hoverState[21];
+    newHoverState.hovered = false;
+    setHoverState([
+      ...hoverState, hoverState[21] = newHoverState
+    ]);
+  }
+
+  const handleRemoveFromCart = (e) => {
+    let removedIndex = cart.findIndex(game => game.id === e.target.id);
+    let newAllGames = allGames.map((game, i) => {
+      if (game.id === e.target.id) {
+        game.inCart = false;
+        game.isHovered = false;
+        return game;
+      } else {
+        return game;
+      }
+    });
+    setAllGames(newAllGames);
+    let firstHalf = cart.slice(0, removedIndex);
+    let secondHalf = cart.slice(removedIndex + 1);
+    let addedUp = firstHalf.concat(secondHalf);
+    setCart(addedUp);
+    setCartAmount(cartAmount - 1)
+    setHoverState([...hoverState, hoverState[21].hovered = false]);
+  }
+
+  useEffect(() => {
+    setOverlap(false);
+
+    if (location.pathname === "/") {
+      setBrowsing(false);
     } else {
-      return game;
+      setBrowsing(true);
     }
-  });
-  setAllGames(newAllGames);
-  let firstHalf = cart.slice(0, removedIndex);
-  let secondHalf = cart.slice(removedIndex + 1);
-  let addedUp = firstHalf.concat(secondHalf);
-  setCart(addedUp);
-  setCartAmount(cartAmount - 1)
-  setHoverState([...hoverState, hoverState[21].hovered = false]);
-}
 
-useEffect(() => {
-  setOverlap(false);
+    if (location.pathname !== "/browse") {
+      document.body.style.overflow = "hidden";
 
-  if (location.pathname === "/") {
-    setBrowsing(false);
-  } else {
-    setBrowsing(true);
+    } else if (location.pathname === "/browse") {
+      document.body.style.overflow = "scroll";
+    }
+  }, [location.pathname])
+
+  const handleOpenCart = () => {
+    setCartDisplayed(true);
   }
 
-  if (location.pathname !== "/browse") {
-    document.body.style.overflow = "hidden";
-
-  } else if (location.pathname === "/browse") {
-    document.body.style.overflow = "scroll";
+  const handleCloseCart = () => {
+    setCartDisplayed(false);
   }
-}, [location.pathname])
 
-const handleOpenCart = () => {
-  setCartDisplayed(true);
-}
+  useEffect(() => {
+    console.log(selectedGame);
+  }, [selectedGame])
 
-const handleCloseCart = () => {
-  setCartDisplayed(false);
-}
-
-useEffect(() => {
-  console.log(selectedGame);
-}, [selectedGame])
-
-useEffect(() => {
-  if (cartDisplayed) {
-    document.body.style.overflow = "hidden !important";   
-  } else {
-    document.body.style.overflow = "scroll !important";
-  }
-}, [cartDisplayed])
+  useEffect(() => {
+    if (cartDisplayed) {
+      document.body.style.overflow = "hidden !important";
+    } else {
+      document.body.style.overflow = "scroll !important";
+    }
+  }, [cartDisplayed])
 
   return (
       <AnimatePresence exitBeforeEnter>
-          <Routes key={location.pathname} location={location}>
-            <Route path="/" element={<Home
-                                        handleHover={handleHover} 
-                                        hoverState={hoverState} 
-                                        shownGames={shownGames} 
-                                        cart={cart}
-                                        cartAmount={cartAmount}
-                                        cartDisplayed={cartDisplayed}
-                                        handleOpenCart={handleOpenCart}
-                                        handleCloseCart={handleCloseCart}
-                                        clearCart={clearCart}
-                                        handleAddToCart={handleAddToCart}
-                                        handleLike={handleLike}
-                                        handleHoverGame={handleHoverGame}
-                                        handleSelectGame={handleSelectGame}
-                                        handleRemoveFromCart={handleRemoveFromCart}
-                                        setHoverState={setHoverState}
-                                        overlap={overlap}
-                                        setOverlap={setOverlap}
-                                        openGamePage={openGamePage}
-                                      />} />
-            <Route path="/browse" element={<Browse
-                                              cart={cart}
-                                              cartAmount={cartAmount}
-                                              handleHover={handleHover} 
-                                              handleSelect={handleSelect} 
-                                              hoverState={hoverState} 
-                                              currentFilter={currentFilter} 
-                                              shownGames={shownGames} 
-                                              setShownGames={setShownGames} 
-                                              clearFilter={clearFilter} 
-                                              reviewDisplay={reviewDisplay}
-                                              setReviewDisplay={setReviewDisplay}
-                                              allGames={allGames}
-                                              setAllGames={setAllGames}
-                                              handleLike={handleLike}
-                                              handleHoverGame={handleHoverGame}
-                                              handleAddToCart={handleAddToCart}
-                                              handleSelectGame={handleSelectGame}
-                                              handleSearch={handleSearch}
-                                              handleSearchSubmit={handleSearchSubmit}
-                                              search={search}
-                                              searching={searching}
-                                              browsing={browsing}
-                                              handleBrowse={handleBrowse}
-                                              handleHome={handleHome}
-                                              cartDisplayed={cartDisplayed}
-                                              handleOpenCart={handleOpenCart}
-                                              handleCloseCart={handleCloseCart}
-                                              clearCart={clearCart}
-                                              handleRemoveFromCart={handleRemoveFromCart}
-                                              setHoverState={setHoverState}
-                                              openGamePage={openGamePage}
-                                          />} />
-            <Route path="/games/:gameId" element={<GamePage
-                                               cart={cart}
-                                               cartAmount={cartAmount}
-                                               handleHover={handleHover}
-                                               hoverState={hoverState}
-                                               handleLike={handleLike}
-                                               handleAddToCart={handleAddToCart}
-                                               handleSelectGame={handleSelectGame} 
-                                               selectedGame={selectedGame}
-                                               setSelectedGame={setSelectedGame}
-                                               handleSearch={handleSearch}
-                                               handleSearchSubmit={handleSearchSubmit}
-                                               search={search}
-                                               searching={searching}
-                                               browsing={browsing}
-                                               handleBrowse={handleBrowse}
-                                               handleHome={handleHome}
-                                               setHoverState={setHoverState}
-                                               allGames={allGames}
-                                               extended={extended}
-                                               setExtended={setExtended}
-                                               textExtended={textExtended}
-                                               setTextExtended={setTextExtended}
-                                               cartDisplayed={cartDisplayed}
-                                               handleOpenCart={handleOpenCart}
-                                               handleCloseCart={handleCloseCart}
-                                               clearCart={clearCart}
-                                               handleRemoveFromCart={handleRemoveFromCart}
-                                               openGamePage={openGamePage}
-                                            />} />
-            <Route path="*" element={<NotFound 
-                            cartDisplayed={cartDisplayed}
-                            handleCloseCart={handleCloseCart}
-                            handleOpenCart={handleOpenCart}
-                            cartAmount={cartAmount}
-                            clearCart={clearCart}
-                            hoverState={hoverState}
-                            handleHome={handleHome}
-                            handleHover={handleHover}
-                            cart={cart}
-                            browsing={browsing}
-                            search={search}
-                            searching={searching}
-                            handleSearch={handleSearch}
-                            handleSearchSubmit={handleSearchSubmit}
-                            handleBrowse={handleBrowse}
-                            handleRemoveFromCart={handleRemoveFromCart}
-                            openGamePage={openGamePage}
+        <Routes key={location.pathname} location={location}>
+          <Route path="/" element={<Home
+              handleHover={handleHover}
+              hoverState={hoverState}
+              shownGames={shownGames}
+              cart={cart}
+              cartAmount={cartAmount}
+              cartDisplayed={cartDisplayed}
+              handleOpenCart={handleOpenCart}
+              handleCloseCart={handleCloseCart}
+              clearCart={clearCart}
+              handleAddToCart={handleAddToCart}
+              handleLike={handleLike}
+              handleHoverGame={handleHoverGame}
+              handleSelectGame={handleSelectGame}
+              handleRemoveFromCart={handleRemoveFromCart}
+              setHoverState={setHoverState}
+              overlap={overlap}
+              setOverlap={setOverlap}
+              openGamePage={openGamePage}
           />} />
-          </Routes>
+          <Route path="/browse" element={<Browse
+              cart={cart}
+              cartAmount={cartAmount}
+              handleHover={handleHover}
+              handleSelect={handleSelect}
+              hoverState={hoverState}
+              currentFilter={currentFilter}
+              shownGames={shownGames}
+              setShownGames={setShownGames}
+              clearFilter={clearFilter}
+              reviewDisplay={reviewDisplay}
+              setReviewDisplay={setReviewDisplay}
+              allGames={allGames}
+              setAllGames={setAllGames}
+              handleLike={handleLike}
+              handleHoverGame={handleHoverGame}
+              handleAddToCart={handleAddToCart}
+              handleSelectGame={handleSelectGame}
+              handleSearch={handleSearch}
+              handleSearchSubmit={handleSearchSubmit}
+              search={search}
+              searching={searching}
+              browsing={browsing}
+              handleBrowse={handleBrowse}
+              handleHome={handleHome}
+              cartDisplayed={cartDisplayed}
+              handleOpenCart={handleOpenCart}
+              handleCloseCart={handleCloseCart}
+              clearCart={clearCart}
+              handleRemoveFromCart={handleRemoveFromCart}
+              setHoverState={setHoverState}
+              openGamePage={openGamePage}
+          />} />
+          <Route path="/games/:gameId" element={<GamePage
+              cart={cart}
+              cartAmount={cartAmount}
+              handleHover={handleHover}
+              hoverState={hoverState}
+              handleLike={handleLike}
+              handleAddToCart={handleAddToCart}
+              handleSelectGame={handleSelectGame}
+              selectedGame={selectedGame}
+              setSelectedGame={setSelectedGame}
+              handleSearch={handleSearch}
+              handleSearchSubmit={handleSearchSubmit}
+              search={search}
+              searching={searching}
+              browsing={browsing}
+              handleBrowse={handleBrowse}
+              handleHome={handleHome}
+              setHoverState={setHoverState}
+              allGames={allGames}
+              extended={extended}
+              setExtended={setExtended}
+              textExtended={textExtended}
+              setTextExtended={setTextExtended}
+              cartDisplayed={cartDisplayed}
+              handleOpenCart={handleOpenCart}
+              handleCloseCart={handleCloseCart}
+              clearCart={clearCart}
+              handleRemoveFromCart={handleRemoveFromCart}
+              openGamePage={openGamePage}
+          />} />
+          <Route path="*" element={<NotFound
+              cartDisplayed={cartDisplayed}
+              handleCloseCart={handleCloseCart}
+              handleOpenCart={handleOpenCart}
+              cartAmount={cartAmount}
+              clearCart={clearCart}
+              hoverState={hoverState}
+              handleHome={handleHome}
+              handleHover={handleHover}
+              cart={cart}
+              browsing={browsing}
+              search={search}
+              searching={searching}
+              handleSearch={handleSearch}
+              handleSearchSubmit={handleSearchSubmit}
+              handleBrowse={handleBrowse}
+              handleRemoveFromCart={handleRemoveFromCart}
+              openGamePage={openGamePage}
+          />} />
+        </Routes>
       </AnimatePresence>
   );
 }

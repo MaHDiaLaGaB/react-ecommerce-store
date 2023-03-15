@@ -3,7 +3,7 @@ import styles from './NavBar.module.css';
 import { ReactComponent as Logo } from "../../Resources/image/logo.svg";
 import { ReactComponent as Browse } from "../../Resources/image/browse.svg";
 import { ReactComponent as Cart } from "../../Resources/image/cart.svg";
-import { ReactComponent as GitHub } from "../../Resources/image/github.svg";
+// import { ReactComponent as GitHub } from "../../Resources/image/github.svg";
 import { ReactComponent as Search } from "../../Resources/image/search.svg";
 import { motion } from "framer-motion";
 import { useLocation, useNavigate } from 'react-router-dom';
@@ -110,15 +110,15 @@ const NavBar = props => {
         </div>
 
         <div className={styles.navbar_right}>
-            <div 
-              className={styles.githubdiv} 
-              id="2"
-              onMouseEnter={handleHover}
-              onMouseLeave={handleHover}
-            >
-                <GitHub className={styles.gh} />
-                <h3>gianlucajahn</h3>
-            </div>
+            {/*<div */}
+            {/*  className={styles.githubdiv} */}
+            {/*  id="2"*/}
+            {/*  onMouseEnter={handleHover}*/}
+            {/*  onMouseLeave={handleHover}*/}
+            {/*>*/}
+            {/*    <GitHub className={styles.gh} />*/}
+            {/*    <h3>gianlucajahn</h3>*/}
+            {/*</div>*/}
 
             <div 
               className={styles.cartdiv} 

@@ -46,7 +46,10 @@ const GamePage = props => {
     handleRemoveFromCart,
     openGamePage
   } = props;
-
+console.log({
+  setSelectedGame,
+  selectedGame
+})
   let { gameId } = useParams();
   const location = useLocation();
   const [carouselState, setCarouselState] = useState(0);
