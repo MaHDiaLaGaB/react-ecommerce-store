@@ -10,6 +10,7 @@ import { AnimatePresence } from "framer-motion";
 import filterNames from './utils/filterNames';
 import games from './utils/games';
 import templateGame from './utils/templateGame';
+import {endpont} from "./utils/endpoints";
 
 function App() {
   const [currentFilter, setCurrentFilter] = useState("none");
@@ -132,16 +133,13 @@ function App() {
   const navigate = useNavigate();
   const location = useLocation();
 
-  if (location.pathname.includes("/games/") && selectedGame === false) {
-    let surname = location.pathname.split("/").pop()
+  if (location.pathname != endpont.HOME && location.pathname != endpont.BROWSE && selectedGame === false) {
+    let surname = location.pathname.split('/').pop();
     console.log("test");
-    console.log({surname})
     let currentGame = games.find(game => game.surname === surname);
     if (currentGame != undefined) {
-      console.log("found one", {currentGame})
       setSelectedGame(currentGame);
     } else {
-      console.log("used template")
       setSelectedGame(templateGame);
     }
   }
@@ -151,7 +149,7 @@ function App() {
     setTextExtended(false);
     setCartDisplayed(false);
     setHoverState([...hoverState, hoverState[21].hovered = false]);
-    navigate('/browse');
+    navigate(endpont.BROWSE);
   }
 
   const handleHome = () => {
@@ -159,7 +157,7 @@ function App() {
     setTextExtended(false);
     setCartDisplayed(false);
     setHoverState([...hoverState, hoverState[21].hovered = false]);
-    navigate('/');
+    navigate(endpont.HOME);
   }
 
   const handleSearch = (e) => {
@@ -172,8 +170,8 @@ function App() {
     e.preventDefault();
     setSearching(true);
 
-    if (location.pathname != "/browse") {
-      navigate('/browse');
+    if (location.pathname != endpont.BROWSE) {
+      navigate(endpont.BROWSE);
     }
   }
 
@@ -183,9 +181,10 @@ function App() {
 
   const handleSelectGame = (e) => {
     if (e.target.tagName === "BUTTON") {
+      return
     } else if (e.target.classList[0] != "AddToCart_addToCart__zbJPe") {
-      // setSelectedGame(games[e.target.parentNode.id]);
-      navigate(`/games/${games[e.target.parentNode.id].surname}`);
+      setSelectedGame(games[e.target.parentNode.id]);
+      navigate(`${endpont.GAMES}${games[e.target.parentNode.id].surname}`);
     }
   }
 
@@ -211,7 +210,7 @@ function App() {
   const openGamePage = (e) => {
     setCartDisplayed(false);
     let selectedGameSurname = e.target.id;
-    navigate(`/games/${selectedGameSurname}`);
+    navigate(`${endpont.GAMES}${selectedGameSurname}`);
   }
 
   const handleHover = (e) => {
@@ -220,7 +219,7 @@ function App() {
     }
 
     let newHoverState = hoverState.map((element, i) => {
-      if (e.target.id === i) {
+      if (e.target.id == i) {
         element.hovered = !element.hovered;
         return element
       } else {
@@ -233,7 +232,7 @@ function App() {
 
   const handleHoverGame = (e) => {
     let handledHoveredGame = allGames.map((game, i) => {
-      if (e.target.id === i) {
+      if (e.target.id == i) {
         game.isHovered = !game.isHovered
         return game
       } else {
@@ -246,8 +245,8 @@ function App() {
 
   const handleAddToCart = (e) => {
     let handledAddedGame = allGames.map((game, i) => {
-      if (location.pathname === "/browse") {
-        if (e.target.id === i) {
+      if (location.pathname === endpont.BROWSE) {
+        if (e.target.id == i) {
           game.inCart = true
           let newCart = cart;
           newCart.push(game);
@@ -258,7 +257,7 @@ function App() {
           return game;
         }
       } else {
-        if (selectedGame.id === i) {
+        if (selectedGame.id == i) {
           game.inCart = true
           let newCart = cart;
           newCart.push(game);
@@ -291,9 +290,9 @@ function App() {
   }
 
   const handleRemoveFromCart = (e) => {
-    let removedIndex = cart.findIndex(game => game.id === e.target.id);
+    let removedIndex = cart.findIndex(game => game.id == e.target.id);
     let newAllGames = allGames.map((game, i) => {
-      if (game.id === e.target.id) {
+      if (game.id == e.target.id) {
         game.inCart = false;
         game.isHovered = false;
         return game;
@@ -313,16 +312,16 @@ function App() {
   useEffect(() => {
     setOverlap(false);
 
-    if (location.pathname === "/") {
+    if (location.pathname === endpont.HOME) {
       setBrowsing(false);
     } else {
       setBrowsing(true);
     }
 
-    if (location.pathname !== "/browse") {
+    if (location.pathname != endpont.BROWSE) {
       document.body.style.overflow = "hidden";
 
-    } else if (location.pathname === "/browse") {
+    } else if (location.pathname === endpont.BROWSE) {
       document.body.style.overflow = "scroll";
     }
   }, [location.pathname])
@@ -350,7 +349,7 @@ function App() {
   return (
       <AnimatePresence exitBeforeEnter>
         <Routes key={location.pathname} location={location}>
-          <Route path="/" element={<Home
+          <Route path={endpont.HOME} element={<Home
               handleHover={handleHover}
               hoverState={hoverState}
               shownGames={shownGames}
@@ -370,7 +369,7 @@ function App() {
               setOverlap={setOverlap}
               openGamePage={openGamePage}
           />} />
-          <Route path="/browse" element={<Browse
+          <Route path={`${endpont.BROWSE}`} element={<Browse
               cart={cart}
               cartAmount={cartAmount}
               handleHover={handleHover}
@@ -403,7 +402,7 @@ function App() {
               setHoverState={setHoverState}
               openGamePage={openGamePage}
           />} />
-          <Route path="/games/:gameId" element={<GamePage
+          <Route path={`${endpont.GAMES}:gameId`} element={<GamePage
               cart={cart}
               cartAmount={cartAmount}
               handleHover={handleHover}

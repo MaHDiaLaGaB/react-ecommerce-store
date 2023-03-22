@@ -8,6 +8,7 @@ import { useLocation } from 'react-router-dom';
 import "react-slideshow-image/dist/styles.css";
 import { Slide } from "react-slideshow-image";
 import templateGame from '../../utils/templateGame';
+import {endpont} from "../../utils/endpoints";
 
 const Slider = props => {
   const {
@@ -27,7 +28,7 @@ const Slider = props => {
   const location = useLocation();
 
   useEffect(() => {
-    const selectedGameIndex = allGames.findIndex(game => "/games/" + game.surname === location.pathname);
+    const selectedGameIndex = allGames.findIndex(game => '/' + endpont.GAMES + game.surname === location.pathname);
     setSelectedGame(allGames[selectedGameIndex]);
   }, []);
 
